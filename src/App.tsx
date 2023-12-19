@@ -4,6 +4,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import './App.css'
 import Game from './Game'
 import Accueil from './Accueil'
+import End from './End'
 
 function App() {
 
@@ -16,6 +17,10 @@ function App() {
     {
       path: '/game',
       element: <Game />
+    },
+    {
+      path: '/end/:time',
+      element: <End />
     }
   ])
 
@@ -23,7 +28,7 @@ function App() {
   return (
     <>
     
-    <RouterProvider router={router} />
+      <RouterProvider router={router} />
 
     </>
   )

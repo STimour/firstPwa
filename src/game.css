@@ -1,12 +1,30 @@
 body{
+    min-width: 100vw;
+    min-height: 100vh;
     background: black;
-    width: 100%;
-    height: 100%;
 }
 
-.divTokill{
+
+.game-page{
+    width: 80%;
+    height: 80%;
+}
+
+.score{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    text-align: center;
+}
+
+.scoreInfo{
+    margin: 30px;
+}
+
+.divTokill {
     background: white;
-    border-radius: 25%;
-    width: 30px;
-    height: 30px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    position: absolute;
 }
