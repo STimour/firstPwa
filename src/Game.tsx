@@ -34,10 +34,14 @@ const Game: React.FC = () =>{
         if(nbKills < 9){
             setNbKills(nbKills + 1)
         }else{
-            if ('vibrate' in navigator) {
-                // Déclencher la vibration pendant 2 secondes
+            let canVibrate = false;
+            if('vibrate' in navigator){
+                canVibrate = true;
+            }
+            if (canVibrate){
                 navigator.vibrate(500);
-              }
+            }
+
             navigate('/end/'+ tempsPass)
         }
     }
@@ -54,7 +58,7 @@ const Game: React.FC = () =>{
                <div className="scoreInfo"> <Chrono onTimeUp={handleTimeUp}/> </div>
             </div>
             <div className="page game-page">
-                <img src="../public/assets/rabbit.png" className="divTokill" style={position} onClick={handelDivClick}/>
+                <img src="rabbit.png" className="divTokill" style={position} onClick={handelDivClick}/>
             </div>
         </>
     )
