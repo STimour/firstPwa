@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 const End = () => {
     const navigate = useNavigate()

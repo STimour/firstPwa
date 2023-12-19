@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import "./game.css"
 import { useNavigate } from "react-router-dom"
 import Chrono from "./Chrono"

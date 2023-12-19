@@ -5,7 +5,7 @@ interface ChronoProps {
 }
 
 const Chrono: React.FC<ChronoProps> = ({ onTimeUp }) => {
-  const [tempsPass, setTempsPass] = useState(0);
+  const [_, setTempsPass] = useState(0);
   const [debut, setDebut] = useState(0);
   useEffect(() => {
     setDebut(Date.now())
