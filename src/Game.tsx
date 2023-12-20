@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import "./game.css"
 import { useNavigate } from "react-router-dom"
 import Chrono from "./Chrono"
-import Chrono2 from "./timer/Chrono2"
+
 
 
 
