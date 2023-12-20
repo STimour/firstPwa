@@ -1,22 +1,66 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import "./game.css"
 import { useNavigate } from "react-router-dom"
 import Chrono from "./Chrono"
-const getRandomPositon = () => {
-    return{
-        top: (Math.random()* 100 ) + "%",
-        left: (Math.random()* 100 ) + "%"
-    }
-}
+import Chrono2 from "./timer/Chrono2"
+
+
+
 
 
 
 const Game: React.FC = () =>{
+    
+    
+    const getRandomPositon = () => {
+        const gamePage = document.querySelector('.game-page');
+        return{
+            top: (Math.floor(Math.random()  * gamePage?.clientHeight!)) + "px",
+            left: (Math.floor(Math.random()  * gamePage?.clientWidth!)) + "px"
+        }
+    }
     const [tempsPass, setTempsPass] = useState(0);
     const [position, setPosition] = useState(getRandomPositon())
     const [nbKills, setNbKills] = useState(0)
+    const [userCountry, setUserCountry] = useState("")
+   
     const navigate = useNavigate()
 
+
+    /*ANCHOR - localisation */
+    const positionData = []
+
+
+    // Fonction pour obtenir l'adresse à partir de la latitude et de la longitude
+    async function  getAdressFromCoordinates(latitude: string, longitude: string) {
+        const response =  await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`)   
+        const data = await response.json()
+        setUserCountry(data.address.country)
+        
+    }
+    // Fonction pour obtenir la position actuelle de l'utilisateur
+   
+    useEffect(() =>{
+        if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(position =>{
+                ({
+                    lat: position.coords.latitude.toString(),
+                    lng: position.coords.longitude.toString()
+                })
+                const user = { 
+                            lat: position.coords.latitude.toString(),
+                            lng: position.coords.longitude.toString(), 
+                            name: "Utilisateur" }
+                positionData.push(user)
+                getAdressFromCoordinates(position.coords.latitude.toString(),
+                position.coords.longitude.toString())
+            })}
+
+    }, [])
+    /*ANCHOR - localisation */
+    
+    
+    
     const handelDivClick = () => {
         setPosition(getRandomPositon())
         const audioContext = new AudioContext();
@@ -50,15 +94,19 @@ const Game: React.FC = () =>{
         setTempsPass(newTime)
     };
 
-
     return(
         <>
             <div className="score">
-               <div className="scoreInfo"> {nbKills}/10 </div> 
-               <div className="scoreInfo"> <Chrono onTimeUp={handleTimeUp}/> </div>
+                <div className="scoreInfo">
+                    Vous êtes en {userCountry}</div>
+                <div className="scoreInfo"> 
+                    {nbKills}/10 </div> 
+                <div className="scoreInfo"> 
+                    <Chrono onTimeUp={handleTimeUp} isPaused={false} />
+                </div>
             </div>
             <div className="page game-page">
-                <img src="rabbit.png" className="divTokill" style={position} onClick={handelDivClick}/>
+                <img src="./rabbit.png" className="divTokill" style={position} onClick={handelDivClick}/>
             </div>
         </>
     )

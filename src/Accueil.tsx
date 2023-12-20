@@ -1,24 +1,26 @@
 import { useNavigate } from 'react-router-dom'
-
+import { usePWAInstall } from "react-use-pwa-install";
 
 import './App.css'
 
 
 function Accueil() {
- 
+  const install = usePWAInstall();
   const navigate = useNavigate()
 
 
   return (
     <>
   
-      <h1>divKiller</h1>
+      <h1>KilleTheRabbit</h1>
       <div className="card">
-        <button onClick={() => navigate("/Game")}>
+        <button style={{margin: "30px"}} onClick={() => navigate("/Game")}>
           START 
         </button>
+        <button style={{margin: "30px"}} onClick={() => install()}>Install</button>
       </div>
     </>
   )
 }
 export default Accueil
+
