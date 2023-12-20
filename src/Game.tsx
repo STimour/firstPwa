@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import "./game.css"
 import { useNavigate } from "react-router-dom"
-import Chrono from "./Chrono"
+import Chrono from "./timer/Chrono"
 
 
 
@@ -90,25 +90,23 @@ const Game: React.FC = () =>{
         }
     }
 
-    const handleTimeUp = (newTime: number) => {
-        setTempsPass(newTime)
-    };
+ 
 
     return(
-        <>
+        <div className="page">
             <div className="score">
                 <div className="scoreInfo">
                     Vous êtes en {userCountry}</div>
                 <div className="scoreInfo"> 
                     {nbKills}/10 </div> 
                 <div className="scoreInfo"> 
-                    <Chrono onTimeUp={handleTimeUp} isPaused={false} />
+                    <Chrono  />
                 </div>
             </div>
             <div className="page game-page">
                 <img src="./rabbit.png" className="divTokill" style={position} onClick={handelDivClick}/>
             </div>
-        </>
+        </div>
     )
 }
 

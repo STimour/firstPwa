@@ -2,26 +2,25 @@ import { useEffect, useState } from 'react'
 import Timer from './Timer'
 import ControlButtons from './ControlButtons'
 
-const Chrono2 = () => {
+const Chrono = () => {
     const [isPaused, setIsPaused] = useState(false)
     const [time, setTime] = useState(0)
-
-    useEffect(() => {
-        let interval = null
-
-        if (isPaused === false){
-            interval = setInterval(() => {
-                setTime((time) => time + 10)
-            }, 10)
-        } else {
-            clearInterval(interval!)
-        }
-    }, [isPaused])
-
 
     const handlePause = () => {
         setIsPaused(!isPaused)
     }
+
+    useEffect(() => {
+        let interval = null
+        if(isPaused === false){
+            interval = setInterval(() => {
+                setTime(seconds => seconds + 1);
+              }, 10);
+        } else if (!isPaused && time !== 0) {
+            clearInterval(interval!);
+        } 
+          return () => clearInterval(interval!);
+        }, [isPaused, time]);
 
     return(
         <>
@@ -36,4 +35,4 @@ const Chrono2 = () => {
     )
 
 }
-export default Chrono2
+export default Chrono
